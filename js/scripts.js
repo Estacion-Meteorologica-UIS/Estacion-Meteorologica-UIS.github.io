@@ -25,7 +25,7 @@ async function setup() {
         // Get other properties of station
         const response = await fetch(
             `https://api.thingspeak.com/channels/${id}/feeds.json?api_key=${key}&results=1` +
-                "&timezone=America%2FBogota&status=true"
+                "&timezone=America%2FBogota&status=true&round=1"
         );
         const data = await response.json();
         const { name, latitude, longitude, updated_at } = data.channel;
@@ -63,7 +63,7 @@ async function updateStationsStatus() {
         const station = STATIONS[index];
         const response = await fetch(
             `https://api.thingspeak.com/channels/${station.id}/feeds.json?api_key=${station.key}&results=1` +
-                "&timezone=America%2FBogota&status=true"
+                "&timezone=America%2FBogota&status=true&round=1"
         );
         const data = await response.json();
 
