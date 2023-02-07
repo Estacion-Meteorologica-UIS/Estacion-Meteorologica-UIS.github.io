@@ -58,7 +58,7 @@ async function setup() {
 }
 
 async function updateStationsStatus() {
-    // This function get the last feed (must be executed at least every minute)
+    // This function gets the last feed
     for (let index = 0; index < STATIONS.length; index++) {
         const station = STATIONS[index];
         const response = await fetch(
@@ -67,7 +67,7 @@ async function updateStationsStatus() {
         );
         const data = await response.json();
 
-        station.last_feed = data.feeds;
+        station.last_feed = data.feeds[0];
     }
 }
 
@@ -77,9 +77,6 @@ function updateMap() {
 }
 
 function update() {
-    // TODO: Fix updateStationsStatus
-    // La segunda vez que se ejecuta no se obtinen correctamente los datos
-    // Solución fácil: Forzar a actualizar la página para actualizar los datos
     updateStationsStatus();
     updateMap();
     updateGauges();
